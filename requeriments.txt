@@ -1,3 +1,5 @@
-flask
-boto3
-uvicorn  # Si usas FastAPI
+Flask==2.2.3
+boto3==1.26.0
+matplotlib==3.7.1
+
+

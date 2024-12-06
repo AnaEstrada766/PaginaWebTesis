@@ -1,28 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Accesos</title>
-    <link rel="stylesheet" href="static/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Generador de Gráficos</title>
 </head>
 <body>
-    <header>
-        <h1>Historial de Accesos - Estacionamiento</h1>
-    </header>
-
-    <section class="charts">
-        <div class="chart-container">
-            <h2>Accesos por Entrada</h2>
-            <canvas id="accesosChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <h2>Promedio de Duración</h2>
-            <canvas id="duracionChart"></canvas>
-        </div>
-    </section>
-
-    <script src="static/js/scripts.js"></script>
+    <h1>Generador de Gráficos Dinámicos</h1>
+    <p>Selecciona un filtro de tiempo y haz clic en el botón para generar un gráfico:</p>
+    
+    <form action="/generate_plot" method="get">
+        <label for="time_filter">Selecciona el filtro de tiempo:</label>
+        <select name="time_filter" id="time_filter">
+            <option value="day">Último día</option>
+            <option value="week">Última semana</option>
+            <option value="month">Último mes</option>
+        </select>
+        <button type="submit">Generar Gráfico</button>
+    </form>
 </body>
 </html>
