@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estadísticas de Accesos</title>
+    <title>Estadísticas</title>
 </head>
 <body>
     <h1>Estadísticas de Accesos</h1>
-    <p>Total de accesos: {{ total_accesses }}</p>
-    <p>Duración promedio de estancia (en minutos): {{ avg_duration }}</p>
-    <p>Accesos menores a 5 minutos: {{ short_durations }}</p>
-    <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico de estadísticas">
-    <a href="/">Regresar</a>
+    <p>Entradas: {{ entradas }}</p>
+    <p>Salidas: {{ salidas }}</p>
+    <p>Duración Promedio: {{ avg_duration }} horas</p>
+    <p>Menores a 5 minutos: {{ short_durations }}</p>
+    <p>Más de 12 horas: {{ long_durations }}</p>
+
+    <h2>Gráfico de Estadísticas</h2>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico de Estadísticas">
 </body>
 </html>

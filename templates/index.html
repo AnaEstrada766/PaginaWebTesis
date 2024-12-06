@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accesos</title>
+    <title>Estadísticas de Vehículos</title>
 </head>
 <body>
-    <h1>Bienvenido al sistema de estadísticas</h1>
-    <p>Seleccione el rango de tiempo para las estadísticas:</p>
+    <h1>Estadísticas de Vehículos</h1>
     <form action="/generate_plot" method="get">
-        <label for="time_filter">Rango de tiempo:</label>
-        <select id="time_filter" name="time_filter">
-            <option value="day">Último día</option>
-            <option value="week">Última semana</option>
-            <option value="month">Último mes</option>
-        </select>
-        <button type="submit">Generar estadísticas</button>
+        <label for="time_filter">Filtro de tiempo:</label>
+        <select name="time_filter" id="time_filter">
+            <option value="day">Último Día</option>
+            <option value="week">Última Semana</option>
+            <option value="month">Último Mes</option>
+            <option value="year">Último Año</option>
+        </select><br><br>
+        <label for="month">Mes (YYYY-MM):</label>
+        <input type="text" name="month" id="month"><br><br>
+        <label for="year">Año (YYYY):</label>
+        <input type="text" name="year" id="year"><br><br>
+        <button type="submit">Generar</button>
     </form>
 </body>
 </html>
