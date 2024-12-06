@@ -1,13 +1,16 @@
-<!-- templates/plot.html -->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráfico</title>
+    <title>Estadísticas de Accesos</title>
 </head>
 <body>
-    <h1>Gráfico generado</h1>
-    <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico">
+    <h1>Estadísticas de Accesos</h1>
+    <p>Total de accesos: {{ total_accesses }}</p>
+    <p>Duración promedio de estancia (en minutos): {{ avg_duration }}</p>
+    <p>Accesos menores a 5 minutos: {{ short_durations }}</p>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico de estadísticas">
+    <a href="/">Regresar</a>
 </body>
 </html>

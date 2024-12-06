@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Gráficos</title>
+    <title>Accesos</title>
 </head>
 <body>
-    <h1>Generador de Gráficos Dinámicos</h1>
-    <p>Selecciona un filtro de tiempo y haz clic en el botón para generar un gráfico:</p>
-    
+    <h1>Bienvenido al sistema de estadísticas</h1>
+    <p>Seleccione el rango de tiempo para las estadísticas:</p>
     <form action="/generate_plot" method="get">
-        <label for="time_filter">Selecciona el filtro de tiempo:</label>
-        <select name="time_filter" id="time_filter">
+        <label for="time_filter">Rango de tiempo:</label>
+        <select id="time_filter" name="time_filter">
             <option value="day">Último día</option>
             <option value="week">Última semana</option>
             <option value="month">Último mes</option>
         </select>
-        <button type="submit">Generar Gráfico</button>
+        <button type="submit">Generar estadísticas</button>
     </form>
 </body>
 </html>

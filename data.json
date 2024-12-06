@@ -1,62 +1,14 @@
 [
-  {
-    "placa": "ABC123",
-    "acceso": "1",
-    "timestamp_entrada": 1765398400,
-    "timestamp_salida": 1765402000
-  },
-  {
-    "placa": "DEF456",
-    "acceso": "1",
-    "timestamp_entrada": 1765398600,
-    "timestamp_salida": 1765402600
-  },
-  {
-    "placa": "GHI789",
-    "acceso": "1",
-    "timestamp_entrada": 1765398800,
-    "timestamp_salida": 1765402800
-  },
-  {
-    "placa": "JKL012",
-    "acceso": "1",
-    "timestamp_entrada": 1765399000,
-    "timestamp_salida": 1765402900
-  },
-  {
-    "placa": "MNO345",
-    "acceso": "1",
-    "timestamp_entrada": 1765399200,
-    "timestamp_salida": 1765403000
-  },
-  {
-    "placa": "PQR678",
-    "acceso": "1",
-    "timestamp_entrada": 1765564000,
-    "timestamp_salida": 1765567600
-  },
-  {
-    "placa": "STU901",
-    "acceso": "2",
-    "timestamp_entrada": 1765649200,
-    "timestamp_salida": 1765651000
-  },
-  {
-    "placa": "VWX234",
-    "acceso": "1",
-    "timestamp_entrada": 1765649800,
-    "timestamp_salida": 1765651600
-  },
-  {
-    "placa": "YZA567",
-    "acceso": "2",
-    "timestamp_entrada": 1765735600,
-    "timestamp_salida": 1765735900
-  },
-  {
-    "placa": "BCD890",
-    "acceso": "2",
-    "timestamp_entrada": 1765736200,
-    "timestamp_salida": 1765736500
-  }
+  {"placa": "ABC123", "acceso": "1", "timestamp_entrada": 1704067200, "timestamp_salida": 1704092400}, 
+  {"placa": "DEF456", "acceso": "1", "timestamp_entrada": 1706745600, "timestamp_salida": 1706767200}, 
+  {"placa": "GHI789", "acceso": "2", "timestamp_entrada": 1709251200, "timestamp_salida": 1709272800}, 
+  {"placa": "JKL012", "acceso": "1", "timestamp_entrada": 1711929600, "timestamp_salida": 1711951200}, 
+  {"placa": "MNO345", "acceso": "2", "timestamp_entrada": 1714521600, "timestamp_salida": 1714543200}, 
+  {"placa": "PQR678", "acceso": "1", "timestamp_entrada": 1717200000, "timestamp_salida": 1717221600}, 
+  {"placa": "STU901", "acceso": "2", "timestamp_entrada": 1719792000, "timestamp_salida": 1719813600}, 
+  {"placa": "VWX234", "acceso": "1", "timestamp_entrada": 1722470400, "timestamp_salida": 1722492000}, 
+  {"placa": "YZA567", "acceso": "2", "timestamp_entrada": 1725062400, "timestamp_salida": 1725084000}, 
+  {"placa": "BCD890", "acceso": "1", "timestamp_entrada": 1727740800, "timestamp_salida": 1727762400}, 
+  {"placa": "EFG321", "acceso": "2", "timestamp_entrada": 1730332800, "timestamp_salida": 1730354400}, 
+  {"placa": "HIJ654", "acceso": "1", "timestamp_entrada": 1733011200, "timestamp_salida": 1733032800}
 ]
