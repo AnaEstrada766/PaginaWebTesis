@@ -11,11 +11,29 @@ app = Flask(__name__)
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 placas_table = dynamodb.Table('placas')
 
-# Obtener datos de la base de datos
+# Función para eliminar duplicados basados en la placa
+def remove_duplicates(data):
+    seen = set()
+    unique_data = []
+    for item in data:
+        if item['placa'] not in seen:
+            unique_data.append(item)
+            seen.add(item['placa'])
+    return unique_data
+
+# Obtener datos de la base de datos con paginación
 def get_data_from_db():
+    items = []
     response = placas_table.scan()
-    items = response['Items']
-    return items
+    items.extend(response['Items'])
+
+    # Manejar paginación
+    while 'LastEvaluatedKey' in response:
+        response = placas_table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        items.extend(response['Items'])
+
+    # Eliminar duplicados basados en 'placa'
+    return remove_duplicates(items)
 
 # Filtrar datos según el tiempo
 def filter_data_by_time(data, time_filter, month_filter=None, year_filter=None):
@@ -96,9 +114,13 @@ def generate_plot():
     short_durations = 0
     long_durations = 0
 
+    # Imprimir los datos filtrados para depuración
+    print(f"Datos filtrados: {len(filtered_data)} registros")
+
     for item in filtered_data:
         entrada = item.get('timestamp_entrada')
         salida = item.get('timestamp_salida')
+
 
         # Contar entradas y salidas
         if entrada:  # Si tiene timestamp_entrada, cuenta como una entrada
