@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda Avanzada</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="search-container">
+        <header class="header">
+            <a href="/" class="btn">Regresar</a>
+        </header>
+        <h1>Búsqueda Avanzada</h1>
+        <form method="POST" class="search-form">
+            <div class="form-group">
+                <label for="placa">Placa:</label>
+                <input type="text" id="placa" name="placa" placeholder="Matrícula del vehículo">
+            </div>
+            <div class="form-group">
+                <label for="start_date">Fecha Inicio:</label>
+                <input type="date" id="start_date" name="start_date">
+            </div>
+            <div class="form-group">
+                <label for="end_date">Fecha Fin:</label>
+                <input type="date" id="end_date" name="end_date">
+            </div>
+            <button type="submit" class="btn">Buscar</button>
+        </form>
+        <div class="results">
+            {% if data %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Fecha Entrada</th>
+                            <th>Fecha Salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in data %}
+                        <tr>
+                            <td>{{ item['placa'] }}</td>
+                            <td>{{ item['timestamp_entrada'] }}</td>
+                            <td>{{ item['timestamp_salida'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No se encontraron resultados.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

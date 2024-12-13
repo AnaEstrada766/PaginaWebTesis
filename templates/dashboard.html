@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de Acceso</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <a href="/buscar" class="btn">Búsqueda Avanzada</a>
+        </header>
+
+        <div class="charts-grid">
+            <div class="chart-box">
+                <h3>Entradas y Salidas</h3>
+                <canvas id="entradasSalidasChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Duración Promedio</h3>
+                <canvas id="duracionPromedioChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Accesos Más Usados</h3>
+                <canvas id="accesosChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
