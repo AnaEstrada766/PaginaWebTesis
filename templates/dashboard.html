@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estadísticas de Acceso</title>
+    <title>Dashboard de Estadísticas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -11,6 +11,7 @@
     <div class="dashboard-container">
         <header class="header">
             <a href="/buscar" class="btn">Búsqueda Avanzada</a>
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
         </header>
 
         <div class="charts-grid">
@@ -19,12 +20,12 @@
                 <canvas id="entradasSalidasChart"></canvas>
             </div>
             <div class="chart-box">
-                <h3>Duración Promedio</h3>
+                <h3>Duraciones</h3>
                 <canvas id="duracionPromedioChart"></canvas>
             </div>
             <div class="chart-box">
                 <h3>Accesos Más Usados</h3>
-                <canvas id="accesosChart"></canvas>
+                <canvas id="accesosUsadosChart"></canvas>
             </div>
         </div>
     </div>
