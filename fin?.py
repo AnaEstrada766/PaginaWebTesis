@@ -1,7 +1,7 @@
-aaaafrom flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from datetime import datetime, timedelta
 import boto3
-from decimal import Decimal
+import decimal
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
@@ -11,89 +11,86 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 placas_table = dynamodb.Table('placas')
 usuarios_table = dynamodb.Table('usuarios')
 
+# 🔧 Función para convertir Decimal a tipos nativos
+def convert_decimal(obj):
+    """Convierte Decimals a int o float para que JSON pueda procesarlo."""
+    if isinstance(obj, list):
+        return [convert_decimal(i) for i in obj]
+    elif isinstance(obj, dict):
+        return {str(k): convert_decimal(v) for k, v in obj.items()} 
+    elif isinstance(obj, decimal.Decimal):
+        return int(obj) if obj % 1 == 0 else float(obj)  # 🔥 Convertir a int si no tiene parte decimal
+    else:
+        return obj
 
-def convert_decimal_to_float(data):
-    """Convierte valores Decimal a float en los datos."""
-    if isinstance(data, list):
-        return [convert_decimal_to_float(item) for item in data]
-    elif isinstance(data, dict):
-        return {key: convert_decimal_to_float(value) for key, value in data.items()}
-    elif isinstance(data, Decimal):
-        return float(data)
-    return data
+# 🔧 Función para convertir timestamps a ISO 8601
+def format_timestamps(stats):
+    """Convierte los campos de timestamp a formato ISO 8601."""
+    for key in ['timestamp_entrada', 'timestamp_salida']:
+        if key in stats:
+            try:
+                if isinstance(stats[key], (int, float, decimal.Decimal)):  # Si es UNIX timestamp
+                    stats[key] = datetime.fromtimestamp(float(stats[key])).isoformat()
+            except ValueError:
+                pass
+    return stats
 
-
+# 📘 Función para obtener estadísticas
 def obtener_estadisticas():
     data = get_data_from_db()
-
-    entradas, salidas, durations, short_durations, long_durations = 0, 0, [], 0, 0
-    accesos = {}
+    entradas, salidas, durations, accesos = 0, 0, [], {}
 
     for item in data:
+        item = convert_decimal(item)  # Convertir Decimals antes de usar
         entrada = item.get('timestamp_entrada')
         salida = item.get('timestamp_salida')
-        acceso = item.get('acceso', 'Desconocido')
+        acceso = int(item.get('acceso', 0))  # 🔥 Forzar a que el acceso sea entero
 
         if entrada:
             entradas += 1
-            accesos[acceso] = accesos.get(acceso, 0) + 1
+            accesos[acceso] = accesos.get(acceso, 0) + 1  # 🔥 Forzar a que sea un entero
         if salida:
             salidas += 1
 
         if entrada and salida:
-            entrada_dt = datetime.fromisoformat(entrada)
-            salida_dt = datetime.fromisoformat(salida)
+            entrada_dt = datetime.fromisoformat(entrada) if isinstance(entrada, str) else datetime.fromtimestamp(float(entrada))
+            salida_dt = datetime.fromisoformat(salida) if isinstance(salida, str) else datetime.fromtimestamp(float(salida))
             duration = (salida_dt - entrada_dt).total_seconds() / 3600
             durations.append(duration)
 
-            if duration < 0.083:  # Menos de 5 minutos
-                short_durations += 1
-            if duration > 12:  # Más de 12 horas
-                long_durations += 1
-
     avg_duration = sum(durations) / len(durations) if durations else 0
 
-    stats = {
+    return {
         'entradas': entradas,
         'salidas': salidas,
         'avg_duration': avg_duration,
-        'short_durations': short_durations,
-        'long_durations': long_durations,
-        'accesos': {key: round(value) for key, value in accesos.items()}
+        'accesos': accesos
     }
 
-    return convert_decimal_to_float(stats)
-
-
+# 📘 Obtener datos de la base de datos
 def get_data_from_db():
     items = []
     response = placas_table.scan()
     items.extend(response['Items'])
-
     while 'LastEvaluatedKey' in response:
         response = placas_table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         items.extend(response['Items'])
+    return items
 
-    return convert_decimal_to_float(items)
+# 📘 API para estadísticas
+@app.route('/api/estadisticas')
+def api_estadisticas():
+    stats = obtener_estadisticas()
+    stats = convert_decimal(stats)  # Convertir Decimals a float
+    stats = format_timestamps(stats)  # Convertir timestamps UNIX a ISO 8601
+    return jsonify(stats)
 
-
+# 📘 Rutas de la aplicación
 @app.route('/')
 def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
-
-    stats = obtener_estadisticas()
-    return render_template('dashboard.html', stats=stats)
-
-
-@app.route('/api/estadisticas')
-def api_estadisticas():
-    if 'username' not in session:
-        return jsonify({"message": "No autorizado"}), 401
-
-    stats = obtener_estadisticas()
-    return jsonify(stats)
-
+    return render_template('dashboard.html')
 
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar():
@@ -120,33 +117,28 @@ def buscar():
 
     return render_template('buscar.html', data=data)
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form['username']
+        password = request.form['password']
+        response = usuarios_table.get_item(Key={'username': username})
+        user = response.get('Item')
 
-        try:
-            response = usuarios_table.get_item(Key={'username': username})
-            user = response.get('Item')
-
-            if user and user['password'] == password:
-                session['username'] = username
-                return redirect(url_for('dashboard'))
-            else:
-                return render_template('login.html', error="Usuario o contraseña incorrectos.")
-        except Exception as e:
-            return render_template('login.html', error="Error al validar usuario: " + str(e))
+        if user and user['password'] == password:
+            session['username'] = username
+            return redirect(url_for('dashboard'))
+        else:
+            error = "Usuario o contraseña incorrectos"
+            return render_template('login.html', error=error)
 
     return render_template('login.html')
-
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login'))
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
+

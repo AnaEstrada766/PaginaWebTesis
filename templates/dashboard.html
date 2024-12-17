@@ -1,32 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Estadísticas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <header class="header">
-            <a href="/buscar" class="btn">Búsqueda Avanzada</a>
-            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
-        </header>
+    <header>
+        <a href="/buscar" class="btn">Búsqueda Avanzada</a>
+        <a href="/lista_negra" class="btn">Ver Lista Negra</a>
+        <a href="/lista_negra" class="btn">Agregar a Lista Negra</a>
+        <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+    </header>
 
-        <div class="charts-grid">
-            <div class="chart-box">
-                <h3>Entradas y Salidas</h3>
-                <canvas id="entradasSalidasChart"></canvas>
-            </div>
-            <div class="chart-box">
-                <h3>Duraciones</h3>
-                <canvas id="duracionPromedioChart"></canvas>
-            </div>
-            <div class="chart-box">
-                <h3>Accesos Más Usados</h3>
-                <canvas id="accesosUsadosChart"></canvas>
-            </div>
+    <div class="charts-grid">
+        <div class="chart-box">
+            <h3>Entradas y Salidas</h3>
+            <canvas id="entradasSalidasChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h3>Duraciones</h3>
+            <canvas id="duracionPromedioChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h3>Accesos Más Usados</h3>
+            <canvas id="accesosUsadosChart"></canvas>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>

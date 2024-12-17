@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista Negra</title>
+</head>
+<body>
+<h1>Lista Negra de Matrículas</h1>
+<a href="/agregar_lista_negra">Agregar Matrícula a la Lista Negra</a>
+<table border="1">
+    <tr>
+        <th>Placa</th>
+        <th>Razón</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.placa }}</td>
+        <td>{{ item.razon }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
