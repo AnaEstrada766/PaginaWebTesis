@@ -32,10 +32,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         data: {
             labels: Object.keys(data.accesos),
             datasets: [{
-                data: Object.values(data.accesos).map(Math.round), // Redondear valores
+                data: Object.values(data.accesos).map(Math.round),
                 backgroundColor: ['#fbc02d', '#8e24aa', '#43a047', '#0288d1'],
             }]
         },
         options: { responsive: true, plugins: { legend: { position: 'top' } } }
     });
 });
+

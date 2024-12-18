@@ -7,16 +7,17 @@ body {
     padding: 0;
 }
 
-/* Contenedores Generales */
+/* Contenedor General */
 .dashboard-container, .login-container, .search-container {
-    max-width: 900px;
-    margin: 50px auto;
+    max-width: 1200px;
+    margin: 40px auto;
     padding: 20px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Encabezado */
 .header {
     display: flex;
     justify-content: space-between;
@@ -24,15 +25,23 @@ body {
     margin-bottom: 20px;
 }
 
+.header .btn {
+    margin: 5px;
+}
+
+/* Grillas de Gráficos */
 .charts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
+    text-align: center;
 }
 
 .chart-box {
     padding: 15px;
-    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Tabla de Resultados */
@@ -48,26 +57,35 @@ table {
 
 th, td {
     text-align: center;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ddd;
 }
 
 th {
     background-color: #f2f2f2;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
 /* Botones */
 .btn {
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
     color: white;
     background-color: #4caf50;
-    transition: background-color 0.3s ease;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn:hover {
     background-color: #45a049;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .btn-danger {
@@ -78,10 +96,15 @@ th {
     background-color: #d32f2f;
 }
 
-/* Login Form */
+.btn-large {
+    font-size: 16px;
+    padding: 12px 24px;
+}
+
+/* Formulario de Login */
 .login-container {
     max-width: 400px;
-    margin: 100px auto;
+    margin: 80px auto;
 }
 
 .login-container h1 {
@@ -94,7 +117,7 @@ th {
     flex-direction: column;
 }
 
-.login-container form input {
+.login-container input {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -102,11 +125,76 @@ th {
 }
 
 .login-container .btn {
-    align-self: center;
     width: 100%;
 }
 
 /* Busqueda Avanzada */
-.search-container {
+.search-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-container form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Lista Negra */
+/* Lista Negra */
+.lista-negra-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.lista-negra-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.lista-negra-container table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.lista-negra-container th, .lista-negra-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.lista-negra-container th {
+    background-color: #4caf50;
+    color: white;
+}
+
+.lista-negra-container td {
+    background-color: #f9f9f9;
+}
+
+/* Botones de Navegación */
+.lista-negra-container .btn {
+    display: inline-block;
     margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.lista-negra-container .btn:hover {
+    background-color: #45a049;
 }

@@ -5,27 +5,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <a href="/buscar" class="btn">Búsqueda Avanzada</a>
-        <a href="/lista_negra" class="btn">Ver Lista Negra</a>
-        <a href="/lista_negra" class="btn">Agregar a Lista Negra</a>
-        <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
-    </header>
+<header class="header">
+    <a href="/buscar" class="btn">Búsqueda Avanzada</a>
+    <a href="/lista_negra" class="btn">Ver Lista Negra</a>
+    <a href="/agregar_lista_negra" class="btn">Agregar a Lista Negra</a>
+    <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+</header>
+<div class="charts-grid">
+    <div class="chart-box"><h3>Entradas y Salidas</h3><canvas id="entradasSalidasChart"></canvas></div>
+    <div class="chart-box"><h3>Duraciones</h3><canvas id="duracionPromedioChart"></canvas></div>
+    <div class="chart-box"><h3>Accesos Más Usados</h3><canvas id="accesosUsadosChart"></canvas></div>
+</div>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
-    <div class="charts-grid">
-        <div class="chart-box">
-            <h3>Entradas y Salidas</h3>
-            <canvas id="entradasSalidasChart"></canvas>
-        </div>
-        <div class="chart-box">
-            <h3>Duraciones</h3>
-            <canvas id="duracionPromedioChart"></canvas>
-        </div>
-        <div class="chart-box">
-            <h3>Accesos Más Usados</h3>
-            <canvas id="accesosUsadosChart"></canvas>
-        </div>
-    </div>
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

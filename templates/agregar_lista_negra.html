@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Agregar a la Lista Negra</title>
+    <meta charset="UTF-8">
+    <title>Agregar a Lista Negra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-<h1>Agregar Matrícula a la Lista Negra</h1>
-<form method="POST">
-    <label for="placa">Placa:</label><br>
-    <input type="text" id="placa" name="placa" required><br><br>
-
-    <label for="razon">Razón:</label><br>
-    <input type="text" id="razon" name="razon"><br><br>
-
-    <button type="submit">Agregar</button>
-</form>
+    <div class="lista-negra-container">
+        <h2>Agregar Matrícula a Lista Negra</h2>
+        <form method="POST" action="/agregar_lista_negra">
+            <input type="text" name="placa" placeholder="Matrícula del vehículo" required>
+            <button type="submit" class="btn">Agregar</button>
+        </form>
+        <a href="/" class="btn">Volver al Dashboard</a>
+    </div>
 </body>
 </html>
+
